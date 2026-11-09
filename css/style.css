@@ -616,6 +616,7 @@ button:focus-visible,
   height: calc(var(--unit) * .24);
   padding: calc(var(--unit) * .02) calc(var(--unit) * .03);
   overflow: hidden;
+  overflow-y: auto;
   border-radius: calc(var(--unit) * .015);
   font-size: calc(var(--unit) * .06);
 }

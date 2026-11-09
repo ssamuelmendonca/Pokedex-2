@@ -114,15 +114,16 @@ function atualizarNumero(id)
 
 function exibirDados(info){
     infoScreen.textContent = ''
-    const nome = document.createElement('p')
-    nome.textContent = capitalizar(info.name)
-    nome.style.fontWeight = 'bold'
-    nome.style.fontSize = '1.2rem'
-    const tipo = document.createElement('p')
-    tipo.textContent = ('Type: ' + capitalizar(info.types[0].type.name))
+    let tipos = info.types.map(type => type.type.name).join(', ')
+    const nomeTipo = document.createElement('p')
+    nomeTipo.textContent = (capitalizar(info.name) + ': ' + capitalizar(tipos))
+    nomeTipo.style.fontWeight = 'bold'
+    nomeTipo.style.fontSize = '1.2rem'
     const pesoAltura = document.createElement('p')
     pesoAltura.textContent = 'Weight: ' + info.weight/10 + 'kg' + ' | ' + 'Height: ' + info.height/10 + 'm'
-    infoScreen.append(nome, tipo, pesoAltura)
+    const descricao = document.createElement('p')
+    descricao.textContent = 
+    infoScreen.append(nomeTipo, pesoAltura)
 }
 
 function capitalizar(str){
