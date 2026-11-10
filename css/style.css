@@ -619,6 +619,11 @@ button:focus-visible,
   overflow-y: auto;
   border-radius: calc(var(--unit) * .015);
   font-size: calc(var(--unit) * .06);
+  scroll-behavior: smooth;
+}
+
+.info-screen::-webkit-scrollbar {
+    width: 4px; /* Deixa a barra super fina e discreta */
 }
 
 /* Teclado azul: 5 colunas x 2 linhas */
@@ -645,6 +650,7 @@ button:focus-visible,
   height: calc(var(--unit) * .12);
   border-radius: calc(var(--unit) * .004);
   --color: var(--frame);
+  font-size: 0.55rem;
 }
 
 .white-key--left  { left: 0; }

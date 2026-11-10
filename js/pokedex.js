@@ -34,6 +34,23 @@ key10.addEventListener('click', () => leituraTeclado('0'));
 btnWhiteLeft.addEventListener('click', buscarPokemon);
 btnWhiteRight.addEventListener('click', apagar);
 
+const sensibilidadeScroll = 0.4; 
+
+infoScreen.addEventListener('wheel', function(event) {
+    const precisaDeScroll = infoScreen.scrollHeight > infoScreen.clientHeight;
+    
+    if (precisaDeScroll) {
+        event.stopPropagation();
+        event.preventDefault();
+
+        // Rola uma fração menor do deltaY nativo de forma linear
+        infoScreen.scrollBy({
+            top: event.deltaY * sensibilidadeScroll
+        });
+    }
+}, { passive: false });
+
+
 function leituraTeclado(tecla)
 {
     if(!estadoPokedex.digitando)
@@ -54,6 +71,8 @@ function apagar()
         {
             estadoPokedex.digitando = false;
             infoScreen.textContent = 'Aguardando dados…';
+            mainScreen.textContent = 'Nenhum Pokémon carregado'
+            numberDisplay.textContent = '#000'
         }
         else
         {
@@ -112,7 +131,45 @@ function atualizarNumero(id)
     numberDisplay.textContent = idString;
 }
 
-function exibirDados(info){
+let regiaoFinal = ''
+
+async function geracaoRegiao(){
+   try {
+        const response = await fetch('https://pokeapi.co/api/v2/pokemon-species/' + numPokemon + '/')
+        const data = await response.json()
+        const regioes = {
+            'generation-i': 'Kanto',
+            'generation-ii': 'Johto',
+            'generation-iii': 'Hoenn',
+            'generation-iv': 'Sinnoh',
+            'generation-v': 'Unova',
+            'generation-vi': 'Kalos',
+            'generation-vii': 'Alola',
+            'generation-viii': 'Galar',
+            'generation-ix': 'Paldea'
+        }
+        regiaoFinal = regioes[data.generation.name]
+        return regiaoFinal  
+    }
+    catch(erro){
+        regiaoFinal = 'Not Found'
+        return regiaoFinal  
+    }
+}
+
+let description = ''
+async function descricao(){
+    try {const response = await fetch('https://pokeapi.co/api/v2/pokemon-species/' + numPokemon + '/')
+    const data = await response.json()
+    description = data.flavor_text_entries[0].flavor_text.replaceAll('\f', ' ').replaceAll('\n', ' ')
+    return description}
+    catch(erro){
+        description = 'Not Found'
+        return description
+    }
+}
+
+async function exibirDados(info){
     infoScreen.textContent = ''
     let tipos = info.types.map(type => type.type.name).join(', ')
     const nomeTipo = document.createElement('p')
@@ -121,9 +178,12 @@ function exibirDados(info){
     nomeTipo.style.fontSize = '1.2rem'
     const pesoAltura = document.createElement('p')
     pesoAltura.textContent = 'Weight: ' + info.weight/10 + 'kg' + ' | ' + 'Height: ' + info.height/10 + 'm'
-    const descricao = document.createElement('p')
-    descricao.textContent = 
-    infoScreen.append(nomeTipo, pesoAltura)
+    const regiao = document.createElement('p')
+    regiao.textContent = 'Region: ' + await geracaoRegiao()
+    const descricaoTexto = document.createElement('p')
+    descricaoTexto.textContent = 'Description: ' + await descricao()
+    infoScreen.append(nomeTipo, pesoAltura, regiao, descricaoTexto)
+    numPokemon = ''
 }
 
 function capitalizar(str){
