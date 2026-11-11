@@ -78,6 +78,10 @@ infoScreen.addEventListener('wheel', function(event) {
     }
 }, { passive: false });
 
+if(innerWidth <= 600){
+    btnWhiteLeft.style.fontSize = '0.4rem'
+    btnWhiteRight.style.fontSize = '0.4rem'
+}
 
 function leituraTeclado(tecla)
 {
@@ -124,7 +128,9 @@ async function consultarApi(msg)
     }
     catch(erro)
     {
-        alert('Pokémon não encontrado');  
+        alert('Pokémon não encontrado');
+        numPokemon = ''
+        apagar()  
     }
 }
 
