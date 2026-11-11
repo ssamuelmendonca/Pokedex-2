@@ -17,6 +17,10 @@ const key9 = document.querySelector('#key-9');
 const key10 = document.querySelector('#key-10');
 const btnWhiteLeft = document.querySelector('#btn-white-left');
 const btnWhiteRight = document.querySelector('#btn-white-right');
+const btnUp = document.querySelector('#btn-up');
+const btnDown = document.querySelector('#btn-down');
+const btnLeft = document.querySelector('#btn-left');
+const btnRight = document.querySelector('#btn-right');
 const infoScreen = document.querySelector('#info-screen');
 const mainScreen = document.querySelector('#main-screen');
 const numberDisplay = document.querySelector('#number-display');
@@ -33,6 +37,30 @@ key9.addEventListener('click', () => leituraTeclado('9'));
 key10.addEventListener('click', () => leituraTeclado('0'));
 btnWhiteLeft.addEventListener('click', buscarPokemon);
 btnWhiteRight.addEventListener('click', apagar);
+btnUp.addEventListener('click', () => {
+    pokeId = Number(numberDisplay.textContent.replaceAll('#', ''))
+    pokeId += 10 
+    console.log(pokeId)
+    consultarApi(pokeId)
+})
+btnDown.addEventListener('click', () => {
+    pokeId = Number(numberDisplay.textContent.replaceAll('#', ''))
+    pokeId -= 10 
+    console.log(pokeId)
+    consultarApi(pokeId)
+})
+btnLeft.addEventListener('click', () => {
+    pokeId = Number(numberDisplay.textContent.replaceAll('#', ''))
+    pokeId -- 
+    console.log(pokeId)
+    consultarApi(pokeId)
+})
+btnRight.addEventListener('click', () => {
+    pokeId = Number(numberDisplay.textContent.replaceAll('#', ''))
+    pokeId ++ 
+    console.log(pokeId)
+    consultarApi(pokeId)
+})
 
 const sensibilidadeScroll = 0.4; 
 
@@ -96,7 +124,7 @@ async function consultarApi(msg)
     }
     catch(erro)
     {
-        alert(erro.msg);  
+        alert('Pokémon não encontrado');  
     }
 }
 
