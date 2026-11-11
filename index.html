@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -71,7 +71,7 @@
               <span class="absolute lamp frame-dot frame-dot--right"></span>
 
               <!-- TELA PRINCIPAL: mostre aqui a imagem (sprite) do Pokémon -->
-              <div class="absolute main-screen" id="main-screen">Nenhum Pokémon carregado</div>
+              <div class="absolute main-screen" id="main-screen">No Pokémon loaded</div>
 
               <span class="absolute lamp power-led"></span>
 
@@ -140,7 +140,7 @@
             <div class="absolute cover-content">
 
               <!-- TELA DE INFORMAÇÕES: mostre aqui nome, tipos, descrição... -->
-              <div class="absolute info-screen" id="info-screen">Aguardando dados…</div>
+              <div class="absolute info-screen" id="info-screen">Waiting for data…</div>
 
               <!-- Teclado azul (10 teclas) -->
               <div class="absolute keypad" id="keypad">
@@ -176,21 +176,21 @@
 
     <!-- Dica e botão de ajuda -->
     <div class="help-bar">
-      <p class="hint" id="hint">Clique na Pokédex acima para abri-la</p>
+      <p class="hint" id="hint">Click on the Pokédex above to open it</p>
       <button class="help-btn" id="help-btn" aria-label="Como usar">?</button>
     </div>
   </main>
 
   <!-- Janela de ajuda -->
   <dialog class="help-dialog" id="help-dialog">
-    <h2>Como usar</h2>
+    <h2>How to use</h2>
     <ol>
-      <li>Clique na Pokédex para abri-la.</li>
-      <li>Clique na lente azul para fechá-la de novo.</li>
-      <li>Role a rodinha do mouse sobre a Pokédex para aumentá-la ou diminuí-la.</li>
+      <li>Click on the Pokédex to open it.</li>
+      <li>Click on the blue lens to close it again.</li>
+      <li>Scroll the mouse wheel over the Pokédex to zoom in or out.</li>
       <!-- Adicione aqui novos passos conforme criar as funcionalidades -->
     </ol>
-    <button id="help-close">Entendi</button>
+    <button id="help-close">I understood</button>
   </dialog>
 </body>
 </html>

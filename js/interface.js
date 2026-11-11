@@ -23,8 +23,8 @@ function setPokedexOpen(isOpen) {
   lens.tabIndex = isOpen ? 0 : -1;
 
   hint.textContent = isOpen
-    ? 'Clique na lente azul para fechar a Pokédex'
-    : 'Clique na Pokédex acima para abri-la';
+    ? 'Click the blue lens to close the Pokédex'
+    : 'Click on the Pokédex above to open it';
 }
 
 coverFront.addEventListener('click', () => setPokedexOpen(true));
