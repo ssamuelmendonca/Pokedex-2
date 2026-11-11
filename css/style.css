@@ -651,6 +651,12 @@ button:focus-visible,
   border-radius: calc(var(--unit) * .004);
   --color: var(--frame);
   font-size: 0.55rem;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 5px;
 }
 
 .white-key--left  { left: 0; }

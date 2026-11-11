@@ -79,8 +79,8 @@ infoScreen.addEventListener('wheel', function(event) {
 }, { passive: false });
 
 if(innerWidth <= 600){
-    btnWhiteLeft.style.fontSize = '0.4rem'
-    btnWhiteRight.style.fontSize = '0.4rem'
+    btnWhiteLeft.style.fontSize = '0.35rem'
+    btnWhiteRight.style.fontSize = '0.35rem'
 }
 
 function leituraTeclado(tecla)
