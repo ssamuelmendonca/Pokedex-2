@@ -24,6 +24,9 @@ const btnRight = document.querySelector('#btn-right');
 const infoScreen = document.querySelector('#info-screen');
 const mainScreen = document.querySelector('#main-screen');
 const numberDisplay = document.querySelector('#number-display');
+const smallDisplayLeft = document.querySelector('#small-display-left')
+const smallDisplayRight = document.querySelector('#small-display-right')
+
 
 key1.addEventListener('click', () => leituraTeclado('1'));
 key2.addEventListener('click', () => leituraTeclado('2'));
@@ -40,25 +43,25 @@ btnWhiteRight.addEventListener('click', apagar);
 btnUp.addEventListener('click', () => {
     pokeId = Number(numberDisplay.textContent.replaceAll('#', ''))
     pokeId += 10 
-    console.log(pokeId)
+    numPokemon = pokeId
     consultarApi(pokeId)
 })
 btnDown.addEventListener('click', () => {
     pokeId = Number(numberDisplay.textContent.replaceAll('#', ''))
     pokeId -= 10 
-    console.log(pokeId)
+    numPokemon = pokeId
     consultarApi(pokeId)
 })
 btnLeft.addEventListener('click', () => {
     pokeId = Number(numberDisplay.textContent.replaceAll('#', ''))
     pokeId -- 
-    console.log(pokeId)
+    numPokemon = pokeId
     consultarApi(pokeId)
 })
 btnRight.addEventListener('click', () => {
     pokeId = Number(numberDisplay.textContent.replaceAll('#', ''))
     pokeId ++ 
-    console.log(pokeId)
+    numPokemon = pokeId
     consultarApi(pokeId)
 })
 
@@ -102,9 +105,11 @@ function apagar()
         if(numPokemon.length < 1)
         {
             estadoPokedex.digitando = false;
-            infoScreen.textContent = 'Aguardando dados…';
-            mainScreen.textContent = 'Nenhum Pokémon carregado'
+            infoScreen.textContent = 'Waiting data…';
+            mainScreen.textContent = 'No Pokémon loaded'
             numberDisplay.textContent = '#000'
+            smallDisplayLeft.textContent = '---'
+            smallDisplayRight.textContent = '---'
         }
         else
         {
@@ -203,20 +208,31 @@ async function descricao(){
     }
 }
 
+function tipos(info){
+    if(info.types.length > 1){
+       smallDisplayLeft.textContent = capitalizar(info.types[0].type.name)
+    smallDisplayRight.textContent = capitalizar(info.types[1].type.name) 
+    }
+    else{
+        smallDisplayLeft.textContent = capitalizar(info.types[0].type.name)
+        smallDisplayRight.textContent = '---'
+    }
+}
+
 async function exibirDados(info){
     infoScreen.textContent = ''
-    let tipos = info.types.map(type => type.type.name).join(', ')
-    const nomeTipo = document.createElement('p')
-    nomeTipo.textContent = (capitalizar(info.name) + ': ' + capitalizar(tipos))
-    nomeTipo.style.fontWeight = 'bold'
-    nomeTipo.style.fontSize = '1.2rem'
+    tipos(info)
+    const nome = document.createElement('p')
+    nome.textContent = capitalizar(info.name)
+    nome.style.fontWeight = 'bold'
+    nome.style.fontSize = '1.2rem'
     const pesoAltura = document.createElement('p')
     pesoAltura.textContent = 'Weight: ' + info.weight/10 + 'kg' + ' | ' + 'Height: ' + info.height/10 + 'm'
     const regiao = document.createElement('p')
     regiao.textContent = 'Region: ' + await geracaoRegiao()
     const descricaoTexto = document.createElement('p')
     descricaoTexto.textContent = 'Description: ' + await descricao()
-    infoScreen.append(nomeTipo, pesoAltura, regiao, descricaoTexto)
+    infoScreen.append(nome, pesoAltura, regiao, descricaoTexto)
     numPokemon = ''
 }
 

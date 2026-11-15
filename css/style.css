@@ -431,9 +431,9 @@ button:focus-visible,
   background: var(--green-display);
   border: 1px solid #2c6b38;
   border-radius: calc(var(--unit) * .02);
-  color: #10351a;
+  color: #081a0c;
   font-family: "VT323", ui-monospace, monospace;
-  font-size: calc(var(--unit) * .065);
+  font-size: calc(var(--unit) * .075);
 }
 
 
